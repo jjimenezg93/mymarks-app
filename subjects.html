@@ -35,7 +35,40 @@
         <!-- Page Content -->
         <div class="container">
             <div class="col-md-8">
-                <a href="subjects.html">click</a>
+
+                <h1 class="page-header">
+                    <small>{{subject}}</small>
+                </h1>
+                <form id="formSubjects" method="get" action="main.py">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>
+                                <span class="text-center">Trabajo</span>
+                            </td>
+                            <td>
+                                Nota (/10)
+                            </td>
+                            <td>
+                                % total
+                            </td>
+                            <td>
+                                Nota ponderada
+                            </td>
+                        </tr>
+                        {% for subject in subjects %}
+                        {% endfor %}
+                    </table>
+                </form>
+                <!-- Pager -->
+                <ul class="pager">
+                    <li class="previous">
+                        <a href="#">&larr; Previous</a>
+                    </li>
+                    <li class="next">
+                        <a href="#">Next &rarr;</a>
+                    </li>
+                </ul>
+
             </div>
         </div>
     </body>

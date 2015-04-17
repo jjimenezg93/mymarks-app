@@ -14,12 +14,43 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import os
 import webapp2
+import jinja2
+
+#from google.appengine.api import users
+from google.appengine.ext import ndb
+
+JINJA_ENVIRONMENT = jinja2.Environment(
+    loader=jinja2.FileSystemLoader( os.path.dirname( __file__ ) ),
+    extensions=[ "jinja2.ext.autoescape" ],
+    autoescape=True)
+
+
+class Subject(ndb.Model):
+    """Sub model for representing an author."""
+    name = ndb.StringProperty(indexed=False)
+
+class Work(ndb.Model):
+    """Sub model for representing an author."""
+    subject = ndb.StructuredProperty(Subject)
+    mark = ndb.FloatProperty()
+    pond = ndb.IntegerProperty() #mark % over total
+
+subject = Subject("ALS")
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Hello world!')
+        template_values = {
+            'subject': subject.name,
+        }
+        # NO FUNCIONA EL ENVIAR A SUBJECTS.HTML
+        template = JINJA_ENVIRONMENT.get_template( "index.html" )
+        self.response.write(template.render( template_values));
+
+    def post(self):
+        pass
 
 app = webapp2.WSGIApplication(
-    [('/', MainHandler)
+    [('/subjects.html', MainHandler)
 ], debug=True)
