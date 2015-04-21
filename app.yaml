@@ -8,6 +8,7 @@ handlers:
 - url: /
   static_files: subjects.html
   upload: subjects\.html
+  application_readable: True
 
 - url: /resources
   static_dir: resources

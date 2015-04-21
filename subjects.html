@@ -39,7 +39,7 @@
                 <h1 class="page-header">
                     <small>Subjects</small>
                 </h1>
-                <form id="formSubjects" method="get" action="/subjects.html">
+                <form id="formSubjects" method="get" action="/subjects">
                     <table class="table table-bordered">
                         <tr>
                             <td>
@@ -49,16 +49,16 @@
                                 Mark (/10)
                             </td>
                         </tr>
-                        {% for subject in subjects %}
-                            <tr>
-                                <td>
-                                    <span class="text-center">{{subject}}</span>
-                                </td>
-                                <td>
-                                    {{mark}}
-                                </td>
-                            </tr>
-                        {% endfor %}
+
+                        <tr>
+                            <td>
+                                <span class="text-center">{{subject}}</span>
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+
                     </table>
                 </form>
                 <!-- Pager

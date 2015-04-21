@@ -35,22 +35,23 @@ class Work(ndb.Model):
     subject = ndb.StructuredProperty(Subject)
     mark = ndb.FloatProperty()
     pond = ndb.IntegerProperty() #mark % over total
+"""
 
-subject = Subject("ALS")"""
 
 class MainHandler(webapp2.RequestHandler):
     def __init__(self, request=None, response=None):
         self.initialize(request, response)
-        self.subject = self.request.get("subject", "ALS")
+        self.subject ="ALS"
+        # self.request.get("subject", "ALS")
 
     def get(self):
         template_values = {
-            'subject': self.subject,
+            'subject': self.subject
         }
 
         template = JINJA_ENVIRONMENT.get_template("subjects.html")
         self.response.write(template.render(template_values))
 
 app = webapp2.WSGIApplication(
-    [('/subjects.html', MainHandler)
+    [('/subjects', MainHandler)
 ], debug=True)
