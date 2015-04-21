@@ -37,29 +37,31 @@
             <div class="col-md-8">
 
                 <h1 class="page-header">
-                    <small>{{subject}}</small>
+                    <small>Subjects</small>
                 </h1>
-                <form id="formSubjects" method="get" action="main.py">
+                <form id="formSubjects" method="get" action="/subjects.html">
                     <table class="table table-bordered">
                         <tr>
                             <td>
-                                <span class="text-center">Trabajo</span>
+                                <span class="text-center">Subject name</span>
                             </td>
                             <td>
-                                Nota (/10)
-                            </td>
-                            <td>
-                                % total
-                            </td>
-                            <td>
-                                Nota ponderada
+                                Mark (/10)
                             </td>
                         </tr>
                         {% for subject in subjects %}
+                            <tr>
+                                <td>
+                                    <span class="text-center">{{subject}}</span>
+                                </td>
+                                <td>
+                                    {{mark}}
+                                </td>
+                            </tr>
                         {% endfor %}
                     </table>
                 </form>
-                <!-- Pager -->
+                <!-- Pager
                 <ul class="pager">
                     <li class="previous">
                         <a href="#">&larr; Previous</a>
@@ -67,7 +69,7 @@
                     <li class="next">
                         <a href="#">Next &rarr;</a>
                     </li>
-                </ul>
+                </ul>-->
 
             </div>
         </div>

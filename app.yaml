@@ -6,8 +6,8 @@ threadsafe: yes
 
 handlers:
 - url: /
-  static_files: index.html
-  upload: index\.html
+  static_files: subjects.html
+  upload: subjects\.html
 
 - url: /resources
   static_dir: resources

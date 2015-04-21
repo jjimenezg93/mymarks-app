@@ -27,29 +27,29 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     autoescape=True)
 
 
-class Subject(ndb.Model):
-    """Sub model for representing an author."""
+"""class Subject(ndb.Model):
     name = ndb.StringProperty(indexed=False)
+    mark = ndbFloatProperty()
 
 class Work(ndb.Model):
-    """Sub model for representing an author."""
     subject = ndb.StructuredProperty(Subject)
     mark = ndb.FloatProperty()
     pond = ndb.IntegerProperty() #mark % over total
 
-subject = Subject("ALS")
+subject = Subject("ALS")"""
 
 class MainHandler(webapp2.RequestHandler):
+    def __init__(self, request=None, response=None):
+        self.initialize(request, response)
+        self.subject = self.request.get("subject", "ALS")
+
     def get(self):
         template_values = {
-            'subject': subject.name,
+            'subject': self.subject,
         }
-        # NO FUNCIONA EL ENVIAR A SUBJECTS.HTML
-        template = JINJA_ENVIRONMENT.get_template( "index.html" )
-        self.response.write(template.render( template_values));
 
-    def post(self):
-        pass
+        template = JINJA_ENVIRONMENT.get_template("subjects.html")
+        self.response.write(template.render(template_values))
 
 app = webapp2.WSGIApplication(
     [('/subjects.html', MainHandler)
