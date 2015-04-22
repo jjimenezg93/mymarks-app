@@ -23,19 +23,54 @@
                 <div class="navbar-header">
                     <div class="navbar-brand" style="color: #222222">MyMarks</div>
                 </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-                </div>
-                <!-- /.navbar-collapse -->
             </div>
             <!-- /.container -->
         </nav>
 
         <!-- Page Content -->
         <div class="container">
+            <h1 class="page-header">
+                    <small>{{subject}}</small>
+                </h1>
+                <form id="formDetailedSubject" method="get" action="/detailed_subject">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>
+                                <span class="text-center">Work</span>
+                            </td>
+                            <td>
+                                Mark (/10)
+                            </td>
+                            <td>
+                                % over 100
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="text-center">{{work}}</span>
+                            </td>
+                            <td>
+                                <span class="text-center">{{mark}}</span>
+                            </td>
+                            <td>
+                                <span class="text-center">{{pond}}</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                {{total}}
+                            </td>
+                        </tr>
+                    </table>
+                </form>
             <div class="col-md-8">
-                <a href="subjects.html">click</a>
+                <a class="btn btn-primary" href="subjects">Back to subjects</a>
             </div>
         </div>
     </body>

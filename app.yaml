@@ -10,6 +10,21 @@ handlers:
   upload: subjects\.html
   application_readable: True
 
+- url: /add\_subject
+  static_files: add_subject.html
+  upload: add_subject\.html
+  application_readable: True
+
+- url: /detailed\_subject
+  static_files: detailed_subject.html
+  upload: detailed_subject\.html
+  application_readable: True
+
+- url: /add\_work
+  static_files: add_work.html
+  upload: add_work\.html
+  application_readable: True
+
 - url: /resources
   static_dir: resources
 

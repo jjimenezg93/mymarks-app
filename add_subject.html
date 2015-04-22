@@ -37,31 +37,13 @@
             <div class="col-md-8">
 
                 <h1 class="page-header">
-                    <small>Subjects</small>
+                    <small>Add Subject</small>
                 </h1>
-                <form id="formSubjects" method="get" action="/add_subject">
-                    <table class="table table-bordered">
-                        <tr>
-                            <td>
-                                <span class="text-center"><b>Subject name</b></span>
-                            </td>
-                            <td>
-                                <span class="text-center"><b>Mark (/10)</b></span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <span class="text-center">{{subject}}</span>
-                            </td>
-                            <td>
-
-                            </td>
-                        </tr>
-
-                    </table>
+                <form id="formNewSubject" method="post" action="/add_subject">
+                    <div class="col-lg-3">Subject name: </div><input class="col-lg-3" type="text" name="subjectName">
                     <button type="submit" class="btn btn-primary">Add subject</button>
                 </form>
+
                 <!-- Pager
                 <ul class="pager">
                     <li class="previous">
