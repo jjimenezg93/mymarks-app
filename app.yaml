@@ -5,24 +5,19 @@ api_version: 1
 threadsafe: yes
 
 handlers:
-- url: /
-  static_files: subjects.html
-  upload: subjects\.html
-  application_readable: True
-
-- url: /add\_subject
+- url: /add\_subject\.html
   static_files: add_subject.html
-  upload: add_subject\.html
+  upload: add\_subject\.html
   application_readable: True
 
-- url: /detailed\_subject
+- url: /detailed\_subject\.html
   static_files: detailed_subject.html
-  upload: detailed_subject\.html
+  upload: detailed\_subject\.html
   application_readable: True
 
-- url: /add\_work
+- url: /add\_work\.html
   static_files: add_work.html
-  upload: add_work\.html
+  upload: add\_work\.html
   application_readable: True
 
 - url: /resources

@@ -21,7 +21,7 @@
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <div class="navbar-brand" style="color: #222222">MyMarks</div>
+                    <div class="navbar-brand" style="color: #222222"><a href="/"> MyMarks</a></div>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -39,7 +39,7 @@
                 <h1 class="page-header">
                     <small>Subjects</small>
                 </h1>
-                <form id="formSubjects" method="get" action="/add_subject">
+                <form id="formSubjects" method="post" action="/add_subject">
                     <table class="table table-bordered">
                         <tr>
                             <td>
@@ -49,18 +49,18 @@
                                 <span class="text-center"><b>Mark (/10)</b></span>
                             </td>
                         </tr>
-
+                        {% for subject in subjects %}
                         <tr>
                             <td>
-                                <span class="text-center">{{subject}}</span>
+                                <a href="detailed_subject.html?subject={{subject.name}}"><span class="text-center">{{subject.name}}</span></a>
                             </td>
                             <td>
-
+                                <span class="text-center">{{subject.mark}}</span>
                             </td>
                         </tr>
-
+                        {% endfor %}
                     </table>
-                    <button type="submit" class="btn btn-primary">Add subject</button>
+                    <a href="/add_subject.html" id="addSubject" type="submit" class="btn btn-primary">Add subject</a>
                 </form>
                 <!-- Pager
                 <ul class="pager">

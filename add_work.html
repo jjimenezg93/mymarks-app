@@ -1,10 +1,71 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-</body>
+    <title>MyMarks</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="resources/css/blog-home.css" rel="stylesheet">
+</head>
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color:  ghostwhite">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <div class="navbar-brand" style="color: #222222"><a href="/"> MyMarks</a></div>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+
+        <!-- Page Content -->
+        <div class="container">
+            <div class="col-md-8">
+
+                <h1 class="page-header">
+                    <small>Add Subject</small>
+                </h1>
+                <form id="formNewSubject" method="post" action="/add_work">
+                    <div class="form-group">
+                        <label for="workName">Work name </label>
+                        <input class="form-control" type="text" name="workName">
+                    </div>
+                    <div class="form-group">
+                        <label for="workMark">Mark </label>
+                        <input class="form-control" type="text" name="workMark">
+                    </div>
+                    <div class="form-group">
+                        <label for="workPonderation">Ponderation (%) </label>
+                        <input class="form-control" type="text" name="workPonderation">
+                    </div>
+                        <a href="/detailed_subject.html" type="submit" class="btn btn-primary">Back</a>
+                        <button type="submit" class="btn btn-primary">Add work</button>
+                </form>
+
+                <!-- Pager
+                <ul class="pager">
+                    <li class="previous">
+                        <a href="#">&larr; Previous</a>
+                    </li>
+                    <li class="next">
+                        <a href="#">Next &rarr;</a>
+                    </li>
+                </ul>-->
+            </div>
+        </div>
+    </body>
 </html>

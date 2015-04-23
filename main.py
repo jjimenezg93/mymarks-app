@@ -32,7 +32,7 @@ class Subject(ndb.Model):
     mark = ndb.FloatProperty()
 
 class Work(ndb.Model):
-    subject = ndb.StructuredProperty(Subject)
+    subject = ndb.StringProperty()
     name = ndb.StringProperty(indexed=False)
     mark = ndb.FloatProperty()
     pond = ndb.IntegerProperty() #mark % over 100
@@ -41,36 +41,29 @@ class Work(ndb.Model):
 class SubjectsHandler(webapp2.RequestHandler):
     def __init__(self, request=None, response=None):
         self.initialize(request, response)
-        self.subject = "ALS"
+        self.subjects = Subject.query()
 
     def get(self):
         template_values = {
-            'subject': self.subject
+            'subjects': self.subjects
         }
 
         template = JINJA_ENVIRONMENT.get_template("subjects.html")
         self.response.write(template.render(template_values))
-        self.response.write("subjects get")
 
     def post(self):
-        self.response.write("subjects post")
+        pass
 
 class DetailedSubjectHandler(webapp2.RequestHandler):
     def __init__(self, request=None, response=None):
         self.initialize(request, response)
-        self.subject = "ALS"
-        self.work = "exam1"
-        self.mark = 2.00
-        self.pond = 0.40
-        self.total = self.mark * self.pond
+        subjectName = self.request.get("subject")
+        self.works = Work.query(Work.subject == subjectName)
+        self.work = Work(subject="ALS", name="examen", mark=5, pond=45)
 
     def get(self):
         template_values = {
-            'subject': self.subject,
-            'work': self.work,
-            'mark': self.mark,
-            'pond': self.pond * 100,
-            'total': self.total
+            'works': self.work
         }
 
         template = JINJA_ENVIRONMENT.get_template("detailed_subject.html")
@@ -83,15 +76,15 @@ class AddSubjectHandler(webapp2.RequestHandler):
 
 
     def __get__(self):
-        self.response.write("add get")
+        pass
 
     def post(self):
-        self.response.write("add post")
-        newSubject = Subject(name = self.subjectName)
+        newSubject = Subject(id = self.subjectName, name = self.subjectName)
         newSubject.put()
+        self.redirect("/")
 
 
 app = webapp2.WSGIApplication(
-    [('/subjects', SubjectsHandler), ('/detailed_subject', DetailedSubjectHandler),
+    [('/', SubjectsHandler), ('/detailed_subject', DetailedSubjectHandler),
         ('/add_subject', AddSubjectHandler)#, ('/add_work', AddWorkHandler)
 ], debug=True)
