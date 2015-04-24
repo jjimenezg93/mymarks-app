@@ -17,6 +17,7 @@
 import os
 import webapp2
 import jinja2
+import time
 
 #from google.appengine.api import users
 from google.appengine.ext import ndb
@@ -44,6 +45,7 @@ class SubjectsHandler(webapp2.RequestHandler):
         self.subjects = Subject.query()
 
     def get(self):
+        time.sleep(0.125)   # not a good fix
         template_values = {
             'subjects': self.subjects
         }
@@ -54,28 +56,12 @@ class SubjectsHandler(webapp2.RequestHandler):
     def post(self):
         pass
 
-class DetailedSubjectHandler(webapp2.RequestHandler):
-    def __init__(self, request=None, response=None):
-        self.initialize(request, response)
-        subjectName = self.request.get("subject")
-        self.works = Work.query(Work.subject == subjectName)
-        self.work = Work(subject="ALS", name="examen", mark=5, pond=45)
-
-    def get(self):
-        template_values = {
-            'works': self.work
-        }
-
-        template = JINJA_ENVIRONMENT.get_template("detailed_subject.html")
-        self.response.write(template.render(template_values))
-
 class AddSubjectHandler(webapp2.RequestHandler):
     def __init__(self, request=None, response=None):
         self.initialize(request, response)
-        self.subjectName = self.request.get("subjectName")
+        self.subjectName = self.request.get('subjectName')
 
-
-    def __get__(self):
+    def get(self):
         pass
 
     def post(self):
@@ -83,8 +69,43 @@ class AddSubjectHandler(webapp2.RequestHandler):
         newSubject.put()
         self.redirect("/")
 
+class DetailedSubjectHandler(webapp2.RequestHandler):
+    def __init__(self, request=None, response=None):
+        self.initialize(request, response)
+        self.subjectName = self.request.get('subject')
+        self.works = Work.query(Work.subject == self.subjectName)
+        # self.work = Work(subject="ALS", name="examen", mark=5, pond=45)
+
+    def get(self):
+        time.sleep(0.125)   # not a good fix
+        self.response.write(self.subjectName)
+        template_values = {
+            'name': self.subjectName
+        }
+
+        template = JINJA_ENVIRONMENT.get_template("detailed_subject.html")
+        self.response.write(template.render(template_values))
+
+    def post(self):
+        pass
+
+class AddWorkHandler(webapp2.RequestHandler):
+    def __init__(self, request=None, response=None):
+        self.initialize(request, response)
+        self.workName = self.request.get("workName")
+        self.workMark = float(self.request.get("workMark"))
+        self.workPonderation = int(self.request.get("workPonderation"))
+
+    def get(self):
+        pass
+
+    def post(self):
+        newWork = Work(id=self.workName, subject="ALS", name=self.workName, mark=self.workMark, pond=self.workPonderation)
+        newWork.put()
+        self.redirect("/detailed_subject")
+
 
 app = webapp2.WSGIApplication(
     [('/', SubjectsHandler), ('/detailed_subject', DetailedSubjectHandler),
-        ('/add_subject', AddSubjectHandler)#, ('/add_work', AddWorkHandler)
+        ('/add_subject', AddSubjectHandler), ('/add_work', AddWorkHandler)
 ], debug=True)
