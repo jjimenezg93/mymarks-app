@@ -30,20 +30,16 @@
         <!-- Page Content -->
         <div class="container">
             <h1 class="page-header">
-                    <small>{{name}}</small>
+                    <small>{{subject.name}}</small>
                 </h1>
                 <form id="formDetailedSubject" method="post" action="/add_work">
                     <table class="table table-bordered">
                         <tr>
                             <td>
-                                <span class="text-center">Work</span>
+                                <span class="text-center"><b>Work name</b></span>
                             </td>
-                            <td>
-                                Mark (/10)
-                            </td>
-                            <td>
-                                % over 100
-                            </td>
+                            <td><b>Mark (/10)</b></td>
+                            <td><b>% (over 100)</b></td>
                         </tr>
                         {% for work in works %}
                         <tr>
@@ -61,15 +57,12 @@
                         <tr>
                             <td>
                             </td>
-                            <td>
-                            </td>
-                            <td>
-                                {{total}}
-                            </td>
+                            <td><b>Total</b></td>
+                            <td><b>{{subject.mark}}</b></td>
                         </tr>
                     </table>
                     <div class="col-md-8">
-                        <a href="/add_work.html" id="addWork" type="submit" class="btn btn-primary">Add work</a>
+                        <a href="add_work?subject={{subject.name}}" id="addWork" type="submit" class="btn btn-primary">Add work</a>
                     </div>
                 </form>
                     <div class="col-md-8">

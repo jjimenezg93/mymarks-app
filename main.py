@@ -30,13 +30,13 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 class Subject(ndb.Model):
     name = ndb.StringProperty(indexed=True)
-    mark = ndb.FloatProperty()
+    mark = ndb.FloatProperty(default=0)
 
 class Work(ndb.Model):
     subject = ndb.StringProperty()
     name = ndb.StringProperty(indexed=False)
     mark = ndb.FloatProperty()
-    pond = ndb.IntegerProperty() #mark % over 100
+    pond = ndb.FloatProperty() #mark % over 100
 
 
 class SubjectsHandler(webapp2.RequestHandler):
@@ -72,16 +72,18 @@ class AddSubjectHandler(webapp2.RequestHandler):
 class DetailedSubjectHandler(webapp2.RequestHandler):
     def __init__(self, request=None, response=None):
         self.initialize(request, response)
-        print(self.request.GET)
-        self.subjectName = self.request.GET['subject']
-        self.works = Work.query(Work.subject == self.subjectName)
-        # self.work = Work(subject="ALS", name="examen", mark=5, pond=45)
+        self.subject = Subject(id=self.request.GET['subject'], name=self.request.GET['subject'])
+        self.works = Work.query(Work.subject == self.subject.name)
+
 
     def get(self):
-        time.sleep(0.125)   # not a good fix
-        self.response.write(self.subjectName)
+        for work in self.works:
+            self.subject.mark += work.mark * (work.pond/100)
+        self.subject.put()
+        time.sleep(0.25)   # not a good fix
         template_values = {
-            'name': self.subjectName
+            'subject': self.subject,   # send subject to take total mark
+            'works': self.works
         }
 
         template = JINJA_ENVIRONMENT.get_template("detailed_subject.html")
@@ -93,17 +95,28 @@ class DetailedSubjectHandler(webapp2.RequestHandler):
 class AddWorkHandler(webapp2.RequestHandler):
     def __init__(self, request=None, response=None):
         self.initialize(request, response)
-        self.workName = self.request.get("workName")
-        self.workMark = float(self.request.get("workMark"))
-        self.workPonderation = int(self.request.get("workPonderation"))
+        self.subject = Subject(id=self.request.GET['subject'], name=self.request.GET['subject'])
+        self.work = Work(id=self.request.get('workName'), name=self.request.get('workName'), mark=float(self.request.get('workMark', '0.0')), pond=float(self.request.get('workPonderation', '0.0')), subject=self.subject.name)
 
     def get(self):
-        pass
+        time.sleep(0.25)   # not a good fix
+        # self.response.write(self.subjectName)
+        template_values = {
+            'subject': self.subject
+        }
+
+        template = JINJA_ENVIRONMENT.get_template("add_work.html")
+        self.response.write(template.render(template_values))
 
     def post(self):
-        newWork = Work(id=self.workName, subject="ALS", name=self.workName, mark=self.workMark, pond=self.workPonderation)
+        self.works = Work.query(Work.subject == self.subject.name)
+        for work in self.works:
+            self.subject.mark += work.mark * (work.pond/100)
+        self.subject.put()
+        time.sleep(0.25)
+        newWork = Work(id=self.work.name, name=self.work.name, mark=self.work.mark, pond=self.work.pond, subject=self.subject.name)
         newWork.put()
-        self.redirect("/detailed_subject?subject=" + self.request.GET['subject'])
+        self.redirect("/detailed_subject?subject=" + self.subject.name)
 
 
 app = webapp2.WSGIApplication(

@@ -36,9 +36,9 @@
         <div class="container">
             <div class="col-md-8">
 
-                <form id="formNewSubject" method="post" action="/add_work">
+                <form id="formNewSubject" method="post" action="/add_work?subject={{subject.name}}">
                 <h1 class="page-header">
-                    <small>Add Work to {{subject}}</small>
+                    <small>Add Work to {{subject.name}}</small>
                 </h1>
                     <div class="form-group">
                         <label for="workName">Work name </label>
@@ -52,9 +52,9 @@
                         <label for="workPonderation">Ponderation (%) </label>
                         <input class="form-control" type="text" name="workPonderation">
                     </div>
-                        <a href="/detailed_subject?subject={{subject.name}}" type="submit" class="btn btn-primary">Back</a>
-                        <button type="submit" class="btn btn-primary">Add work</button>
+                    <button type="submit" class="btn btn-primary">Add work</button>
                 </form>
+                <a href="/detailed_subject?subject={{subject.name}}" type="submit" class="btn btn-primary">Back</a>
 
                 <!-- Pager
                 <ul class="pager">
