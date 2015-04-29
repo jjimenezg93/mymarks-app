@@ -72,7 +72,8 @@ class AddSubjectHandler(webapp2.RequestHandler):
 class DetailedSubjectHandler(webapp2.RequestHandler):
     def __init__(self, request=None, response=None):
         self.initialize(request, response)
-        self.subjectName = self.request.get('subject')
+        print(self.request.GET)
+        self.subjectName = self.request.GET['subject']
         self.works = Work.query(Work.subject == self.subjectName)
         # self.work = Work(subject="ALS", name="examen", mark=5, pond=45)
 
@@ -102,7 +103,7 @@ class AddWorkHandler(webapp2.RequestHandler):
     def post(self):
         newWork = Work(id=self.workName, subject="ALS", name=self.workName, mark=self.workMark, pond=self.workPonderation)
         newWork.put()
-        self.redirect("/detailed_subject")
+        self.redirect("/detailed_subject?subject=" + self.request.GET['subject'])
 
 
 app = webapp2.WSGIApplication(
