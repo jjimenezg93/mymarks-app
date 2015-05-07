@@ -35,28 +35,14 @@
         <!-- Page Content -->
         <div class="container">
             <div class="col-md-8">
-                {% if pondOver == True %}
-                    <script type="text/javascript">document.write("pondOver");</script>
-                {% endif %}
-                <form id="formNewSubject" method="post" action="/add_work?subject={{subject.name}}">
                 <h1 class="page-header">
-                    <small>Add Work to {{subject.name}}</small>
+                    <small>Delete Work from {{subjectName}}</small>
                 </h1>
-                    <div class="form-group">
-                        <label for="workName">Work name </label>
-                        <input class="form-control" type="text" name="workName">
-                    </div>
-                    <div class="form-group">
-                        <label for="workMark">Mark </label>
-                        <input class="form-control" type="text" name="workMark">
-                    </div>
-                    <div class="form-group">
-                        <label for="workPonderation">Ponderation (%) </label>
-                        <input class="form-control" type="text" name="workPonderation">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add work</button>
+                <form id="formNewSubject" method="post" action="/delete_work?subject={{subjectName}}">
+                    <div class="col-lg-3">Work name: </div><input class="col-lg-3" type="text" name="workToDelete">
+                    <div class="col-lg-12"><button type="submit" class="btn btn-primary">Delete work</button></div>
                 </form>
-                <a href="/detailed_subject?subject={{subject.name}}" type="submit" class="btn btn-primary">Back</a>
+                <a href="/detailed_subject?subject={{subjectName}}" type="submit" class="btn btn-primary">Back</a>
 
                 <!-- Pager
                 <ul class="pager">

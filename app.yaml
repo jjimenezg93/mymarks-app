@@ -10,6 +10,11 @@ handlers:
   upload: add\_subject\.html
   application_readable: True
 
+- url: /delete\_subject\.html
+  static_files: delete_subject.html
+  upload: delete\_subject\.html
+  application_readable: True
+
 - url: /resources
   static_dir: resources
 
