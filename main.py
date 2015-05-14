@@ -89,6 +89,7 @@ class DeleteSubjectHandler(webapp2.RequestHandler):
         subjectToDelete = Subject.query(Subject.name == self.subjectName )
         for subject in subjectToDelete:
             ndb.delete_multi([subject.key])
+            time.sleep(0.25)   # not a good fix
         self.redirect("/")
 
 class DeleteWorkHandler(webapp2.RequestHandler):
@@ -110,6 +111,7 @@ class DeleteWorkHandler(webapp2.RequestHandler):
         worksToDelete = Work.query( Work.name == self.request.get('workToDelete'), Work.subject == self.subjectName )
         for work in worksToDelete:
             ndb.delete_multi([work.key])
+            time.sleep(0.25)   # not a good fix
         self.redirect("/detailed_subject?subject=" + self.subjectName)
 
 class DetailedSubjectHandler(webapp2.RequestHandler):
@@ -124,7 +126,7 @@ class DetailedSubjectHandler(webapp2.RequestHandler):
         self.subject.put()
         time.sleep(0.1)   # not a good fix
         template_values = {
-            'subject': self.subject,   # send subject to take total mark
+            'subject': self.subject,
             'works': self.works
         }
 
@@ -146,7 +148,6 @@ class AddWorkHandler(webapp2.RequestHandler):
 
     def get(self):
         time.sleep(0.1)   # not a good fix
-        # self.response.write(self.subjectName)
         template_values = {
             'subject': self.subject
         }

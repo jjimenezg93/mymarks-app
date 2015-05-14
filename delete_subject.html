@@ -35,15 +35,14 @@
         <!-- Page Content -->
         <div class="container">
             <div class="col-md-8">
-
                 <h1 class="page-header">
                     <small>Delete Subject</small>
                 </h1>
                 <form id="formDeleteSubject" method="post" action="/delete_subject">
-                    <div class="col-lg-3">Subject name: </div><input class="col-lg-3" type="text" name="subjectToDelete">
-                    <div class="col-lg-12"><button type="submit" class="btn btn-primary">Delete subject</button>
-                    <a href="/" type="submit" class="btn btn-primary">Back</a></div>
+                    <div class="col-lg-3">Subject name: </div><input class="col-lg-3" type="text" name="subjectToDelete" required>
+                    <div class="col-lg-12"><button type="submit" class="btn btn-danger">Delete subject</button></div>
                 </form>
+                    <div class="col-lg-12" style="margin-top: 5px;"><a href="/" class="btn btn-link">Back</a></div>
 
                 <!-- Pager
                 <ul class="pager">
